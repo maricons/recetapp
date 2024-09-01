@@ -14,60 +14,25 @@
   </ion-header>
 
   <!-- Search Bar -->
-  <ion-searchbar placeholder="Search a Recipe..."></ion-searchbar>
+  <ion-searchbar placeholder="Buscar receta..." [(ngModel)]="searchTerm" (ionInput)="filterRecipes()"></ion-searchbar>
 
   <!-- New Recipes Title -->
   <div class="new-recipes-title">
-    <h2>New Recipes</h2>
+    <ion-button expand="block" (click)="openNewRecipeModal()">Nueva receta</ion-button>
   </div>
 
   <!--  Cards Section -->
   <!-- Grid Layout for Cards -->
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="6" *ngFor="let receta of filteredRecetas">
         <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
+          <ion-img [src]="receta.imagen"></ion-img>
           <ion-card-header>
-            <ion-card-title>Receta 1</ion-card-title>
+            <ion-card-title>{{ receta.titulo }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            Detalles de la Receta 1.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 2</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 2.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 3</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 3.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 4</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 4.
+            {{ receta.descripcion }}
           </ion-card-content>
         </ion-card>
       </ion-col>
