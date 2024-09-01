@@ -2,7 +2,16 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NewRecipeModalComponent } from '../new-recipe-modal/new-recipe-modal.component';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { RecipeDetailModalComponent } from '../recipe-detail-modal/recipe-detail-modal.component';
+
+interface Receta {
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+  ingredientes: string;
+  instructiones: string;
+}
+
 
 @Component({
   selector: 'app-tab1',
@@ -35,6 +44,16 @@ export class Tab1Page {
   async openNewRecipeModal() {
     const modal = await this.modalController.create({
       component: NewRecipeModalComponent
+    });
+    return await modal.present();
+  }
+
+  async openRecipeDetail(receta: Receta) {
+    const modal = await this.modalController.create({
+      component: RecipeDetailModalComponent,
+      componentProps: {
+        receta: receta
+      }
     });
     return await modal.present();
   }

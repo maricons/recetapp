@@ -26,13 +26,13 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let receta of filteredRecetas">
-        <ion-card>
+        <ion-card (click)="openRecipeDetail(receta)">
           <ion-img [src]="receta.imagen"></ion-img>
           <ion-card-header>
             <ion-card-title>{{ receta.titulo }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            {{ receta.descripcion }}
+            {{ receta.description }}
           </ion-card-content>
         </ion-card>
       </ion-col>

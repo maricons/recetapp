@@ -16,9 +16,10 @@ import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
 import { NewRecipeModalComponent } from './new-recipe-modal/new-recipe-modal.component'; // Importa tu componente
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { RecipeDetailModalComponent } from './recipe-detail-modal/recipe-detail-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, NewRecipeModalComponent],
+  declarations: [AppComponent, NewRecipeModalComponent, RecipeDetailModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule],

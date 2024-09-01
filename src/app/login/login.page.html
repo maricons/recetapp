@@ -39,7 +39,7 @@
         <ion-card-title>Registrarse</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <form (ngSubmit)="register()">
+        <form (ngSubmit)="register(email, password, firstname, lastname)">
           <ion-item>
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
@@ -47,6 +47,16 @@
           <ion-item>
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="firstname" name="firstname" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="lastname" name="lastname" required></ion-input>
           </ion-item>
           <ion-button expand="block" type="submit">Registrarse</ion-button>
         </form>
