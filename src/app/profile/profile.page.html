@@ -1,5 +1,36 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8">
+        <div class="profile-picture-container">
+          <ion-avatar class="profile-avatar">
+            <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
+          </ion-avatar>
+          <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+          <ion-button expand="block" color="primary" (click)="fileInput.click()">Cambiar Foto</ion-button>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="firstName" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input [(ngModel)]="lastName" type="text"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" (click)="saveProfile()">Guardar Cambios</ion-button>
+
+        <!-- Botón de Cerrar Sesión en Rojo -->
+        <ion-button expand="block" color="danger" (click)="logout()">Cerrar sesión</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

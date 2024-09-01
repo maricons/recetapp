@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { NewRecipeModalComponent } from '../new-recipe-modal/new-recipe-modal.component';
 import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { RecipeDetailModalComponent } from '../recipe-detail-modal/recipe-detail-modal.component';
+import { Auth, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 interface Receta {
   titulo: string;
@@ -24,8 +26,18 @@ export class Tab1Page {
   filteredRecetas: any[] = [];
   searchTerm: string = '';
 
-  constructor(private modalController: ModalController, private firestore: Firestore) { }
+  constructor(private router: Router, private modalController: ModalController, private auth: Auth, private firestore: Firestore) { }
   ngOnInit() {
+
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        console.log('User is logged in:', user);
+      } else {
+        console.log('User is not logged in');
+        this.router.navigateByUrl('/login');
+      }
+    });
+
     const recipesCollection = collection(this.firestore, 'recetas');
     collectionData(recipesCollection, { idField: 'id' }).subscribe(data => {
       this.recetas = data;

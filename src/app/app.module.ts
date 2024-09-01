@@ -17,13 +17,14 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { NewRecipeModalComponent } from './new-recipe-modal/new-recipe-modal.component'; // Importa tu componente
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { RecipeDetailModalComponent } from './recipe-detail-modal/recipe-detail-modal.component';
+import { provideStorage, getStorage } from '@angular/fire/storage';  // Cambiado
 
 @NgModule({
   declarations: [AppComponent, NewRecipeModalComponent, RecipeDetailModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({ "projectId": "ionic-movil-grupo9", "appId": "1:39435686784:web:92314e82706aec62f62765", "storageBucket": "ionic-movil-grupo9.appspot.com", "apiKey": "AIzaSyAURv0OnOrELBad898eWLEKi-sYBcxuYUE", "authDomain": "ionic-movil-grupo9.firebaseapp.com", "messagingSenderId": "39435686784", "measurementId": "G-KWK90N6ZJ0" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging())],
+    FormsModule,],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({ "projectId": "ionic-movil-grupo9", "appId": "1:39435686784:web:92314e82706aec62f62765", "storageBucket": "ionic-movil-grupo9.appspot.com", "apiKey": "AIzaSyAURv0OnOrELBad898eWLEKi-sYBcxuYUE", "authDomain": "ionic-movil-grupo9.firebaseapp.com", "messagingSenderId": "39435686784", "measurementId": "G-KWK90N6ZJ0" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()), provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging())],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
