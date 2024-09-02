@@ -15,6 +15,7 @@ export class NewRecipeModalComponent {
     descripcion: '',
     ingredientes: '',
     instrucciones: '',
+    minutos: '',
     imagenUrl: ''
   };
 
@@ -82,6 +83,7 @@ export class NewRecipeModalComponent {
           descripcion: this.recipe.descripcion,
           ingredientes: this.recipe.ingredientes,
           instrucciones: this.recipe.instrucciones,
+          minutos: Number(this.recipe.minutos),
           imagen: this.recipe.imagenUrl,
           autorId: this.currentUser.uid,  // UID del autor para futuras referencias
         });

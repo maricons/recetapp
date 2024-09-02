@@ -26,6 +26,10 @@
       <ion-textarea [(ngModel)]="recipe.instrucciones"></ion-textarea>
     </ion-item>
     <ion-item>
+      <ion-label position="stacked">Tiempo en minutos</ion-label>
+      <ion-textarea [(ngModel)]="recipe.minutos"></ion-textarea>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Imágen</ion-label>
       <input type="file" (change)="onFileSelected($event)" />
     </ion-item>

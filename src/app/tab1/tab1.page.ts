@@ -12,6 +12,7 @@ interface Receta {
   imagen: string;
   ingredientes: string;
   instructiones: string;
+  minutos: number;
 }
 
 
@@ -68,6 +69,16 @@ export class Tab1Page {
       }
     });
     return await modal.present();
+  }
+
+  formatTiempo(tiempo: number): string {
+    if (tiempo >= 60) {
+      const horas = Math.floor(tiempo / 60);
+      const minutos = tiempo % 60;
+      return `${horas}h ${minutos}m`;
+    } else {
+      return `${tiempo}m`;
+    }
   }
 
 }
