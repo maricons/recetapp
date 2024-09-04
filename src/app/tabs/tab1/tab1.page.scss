@@ -1,0 +1,49 @@
+.new-recipes-title {
+  padding: 8px;
+  text-align: left;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.new-recipes-title h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* global.scss o el archivo scss del componente */
+.round-searchbar {
+  --border-radius: 20px;
+  /* Ajusta el valor según el grado de redondez que desees */
+  --background: #f4f4f4;
+  /* Establece el color de fondo */
+  --box-shadow: none;
+  /* Elimina cualquier sombra alrededor del search bar */
+  --ion-color-light-shade: transparent;
+  /* Elimina sombra adicional para temas claros */
+}
+
+.no-border-card {
+  --border-width: 0;
+  /* Quita el borde */
+  box-shadow: none;
+  /* Opcional: elimina la sombra de la card */
+}
+
+.rounded-img {
+  border-radius: 10px;
+  /* Ajusta el valor según tus necesidades */
+  overflow: hidden;
+  /* Asegura que la imagen respete el borde redondeado */
+}
+
+.icon {
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+.text {
+  display: inline-block;
+  vertical-align: middle;
+}

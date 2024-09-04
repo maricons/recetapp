@@ -14,9 +14,15 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import { AngularFireModule } from '@angular/fire/compat';
+<<<<<<< Updated upstream
 import { NewRecipeModalComponent } from './new-recipe-modal/new-recipe-modal.component'; // Importa tu componente
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { RecipeDetailModalComponent } from './recipe-detail-modal/recipe-detail-modal.component';
+=======
+import { NewRecipeModalComponent } from './components/new-recipe-modal/new-recipe-modal.component'; // Importa tu componente
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { RecipeDetailModalComponent } from './components/recipe-detail-modal/recipe-detail-modal.component';
+>>>>>>> Stashed changes
 import { provideStorage, getStorage } from '@angular/fire/storage';  // Cambiado
 
 @NgModule({

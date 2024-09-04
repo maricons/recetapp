@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true">
+
+  <!-- Search Bar -->
+  <ion-searchbar 
+    placeholder="Buscar receta..." 
+    [(ngModel)]="searchTerm" 
+    (ionInput)="filterRecipes()" 
+    class="round-searchbar">
+  </ion-searchbar>
+
+  <!-- New Recipes Title -->
+  <div class="new-recipes-title">
+    <ion-button expand="block" (click)="openNewRecipeModal()">Nueva receta</ion-button>
+  </div>
+
+  <!--  Cards Section -->
+  <!-- Grid Layout for Cards -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let receta of filteredRecetas">
+
+        <ion-card (click)="openRecipeDetail(receta)" class="no-border-card">
+          <!-- Foto y nombre del autor -->
+          <ion-card-header>
+            <div class="author-info">
+              
+              <div class="author-name">
+                {{ getAuthorName(receta.autorId) | async }}
+              </div>
+            </div>
+          </ion-card-header>
+        
+          <!-- Imagen principal -->
+          <ion-img style="height: 5rem; border-radius: 10px; overflow: hidden;" [src]="receta.imagen"></ion-img>
+        
+          <!-- Título -->
+          <ion-card-title class="card-title">
+            <ion-card-title><h6>{{ receta.titulo }}</h6></ion-card-title>
+          </ion-card-title>
+        
+          <!-- Descripción -->
+          <ion-card-content>
+            <ion-icon class="icon" name="time-outline"></ion-icon>
+            <span class="text">{{ formatTiempo(receta.minutos) }}</span>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
