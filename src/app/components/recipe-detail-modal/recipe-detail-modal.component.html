@@ -8,44 +8,52 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <!-- Imagen de la receta -->
-  <ion-img [src]="receta.imagen" class="recipe-image"></ion-img>
-
-  <!-- Contenido del modal -->
-  <div class="recipe-details-container">
-    <h2 class="recipe-title">{{ receta.titulo }}</h2>
+  <!-- Tarjeta de la receta -->
+  <ion-card class="animate__animated animate__slideInUp">
     
-    <div class="recipe-meta-container">
-      <div class="recipe-author">
-        <ion-avatar>
-          <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
-        </ion-avatar>
-        <span>{{ authorName }}</span> <!-- Mostrar el nombre del autor -->
+    <ion-card-header>
+      <ion-card-title>
+        <ion-img [src]="receta.imagen" class="recipe-image"></ion-img>
+      </ion-card-title>
+    </ion-card-header>
+
+    <!-- Contenido del modal dentro de la tarjeta -->
+    <ion-card-content>
+      <h2 class="recipe-title">{{ receta.titulo }}</h2>
+
+      <div class="recipe-meta-container">
+        <div class="recipe-author">
+          <ion-avatar>
+            <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+          </ion-avatar>
+          <span>{{ authorName }}</span> <!-- Mostrar el nombre del autor -->
+        </div>
+        <div class="recipe-likes">
+          <ion-icon name="heart"></ion-icon>
+          <span>273 Likes</span>
+        </div>
       </div>
-      <div class="recipe-likes">
-        <ion-icon name="heart"></ion-icon>
-        <span>273 Likes</span>
-      </div>
-    </div>
 
-    <hr class="divider">
-    
-    <h3>Descripcion</h3>
-    <p>{{ receta.descripcion }}</p>
+      <hr class="divider">
 
-    <hr class="divider">
+      <h3>Descripcion</h3>
+      <p>{{ receta.descripcion }}</p>
 
-    <h3>Ingredientes</h3>
-    <ul>
-      <li *ngFor="let ingredient of receta.ingredientes.split('\n')">
-        <ion-icon name="checkmark-circle"></ion-icon> {{ ingredient }}
-      </li>
-    </ul>
+      <hr class="divider">
 
-    <hr class="divider">
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let ingredient of receta.ingredientes.split('\n')">
+          <ion-icon name="checkmark-circle"></ion-icon> {{ ingredient }}
+        </li>
+      </ul>
 
-    <h3>Instrucciones</h3>
-    <p>{{ receta.instrucciones }}</p>
-  </div>
+      <hr class="divider">
+
+      <h3>Instrucciones</h3>
+      <p>{{ receta.instrucciones }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

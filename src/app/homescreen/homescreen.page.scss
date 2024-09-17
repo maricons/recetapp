@@ -1,0 +1,53 @@
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #ffffff; /* Color de fondo blanco para pruebas */
+  }
+  
+.animated-logo {
+    width: 250px;
+    height: 200px;
+    position: absolute;
+    bottom: -30px;
+    animation: moveToCenter 3s ease-in-out forwards;
+  }
+  
+@keyframes moveToCenter {
+    0% {
+      transform: translateY(100%);
+      bottom: -50px; /* Ajustar el valor inicial */
+    }
+    100% {
+      transform: translateY(0);
+      bottom: 50%;
+    }
+  }
+  
+.button-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+  }
+
+  .animated-button {
+    opacity: 0;
+    background-color: #ff5722; /* Color de fondo del botón */
+    border: none;
+    color: white;
+    transition: opacity 1s ease-in-out, background-color 1s ease-in-out;
+    animation: fadeIn 2s ease-in forwards;
+  }
+  
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      background-color: #ffab40; /* Color final después de la animación */
+    }
+  }

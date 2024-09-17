@@ -1,0 +1,9 @@
+<ion-content [fullscreen]="true">
+  <!-- Aquí comienza la animación -->
+  <div class="animation-container 'animate__animated animate__zoomOutUp': isAnimating" expand="full" (click)="animateButton()" >
+    <img src="assets/images/pixelcut-export.png" class="animated-logo" /> <!-- REEMPLAZAR POR IMAGEN -->
+  </div>
+  <div class="button-container" *ngIf="showButton">
+    <ion-button class="animated-button" expand="full" (click)="goToMainPage()">¡Comencemos!</ion-button>
+  </div>
+</ion-content>
