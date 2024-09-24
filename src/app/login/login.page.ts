@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   async login() {
     try {
       const user = await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      console.log('Login successful', user);
+      console.log('Login correcto', user);
       this.router.navigateByUrl('/tabs/tab1'); // Redirige al usuario a la página principal
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
@@ -34,6 +34,27 @@ export class LoginPage implements OnInit {
   }
 
   async register(email: string, password: string, firstname: string, lastname: string) {
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Por favor, ingresa un correo electrónico válido.');
+      return;
+    }
+  
+    if (!password || password.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+  
+    if (!firstname) {
+      alert('Por favor, ingresa tu nombre.');
+      return;
+    }
+  
+    if (!lastname) {
+      alert('Por favor, ingresa tu apellido.');
+      return;
+    }
+
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
     const user = userCredential.user;
 
@@ -52,11 +73,26 @@ export class LoginPage implements OnInit {
   async logout() {
     try {
       await signOut(this.auth);
-      console.log('Logout successful');
+      console.log('Sesión cerrada');
       this.router.navigateByUrl('/login'); // Redirige al usuario a la página de login
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
       alert('Error al cerrar sesión. Por favor, intenta nuevamente.');
+    }
+  }
+
+  async recoverPassword() {
+    if (!this.email) {
+      alert('Por favor, ingresa tu correo electrónico.');
+      return;
+    }
+  
+    try {
+      await sendPasswordResetEmail(this.auth, this.email);
+      alert('Se ha enviado un correo electrónico para recuperar tu contraseña.');
+    } catch (error) {
+      console.error('Error al enviar el correo de recuperación:', error);
+      alert('Error al enviar el correo de recuperación. Por favor, verifica tu dirección de correo electrónico.');
     }
   }
 }
