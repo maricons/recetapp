@@ -35,7 +35,9 @@ export class NewRecipeModalComponent {
   }
 
   dismiss() {
-    this.modalController.dismiss();
+    this.modalController.dismiss({
+      dismissed: true
+    });
   }
 
   onFileSelected(event: Event) {
@@ -47,7 +49,8 @@ export class NewRecipeModalComponent {
 
   async uploadImage(file: File): Promise<string> {
     const storage = getStorage();
-    const storageRef = ref(storage, `recipe-images/${file.name}`);
+    const uniqueFileName = `${this.currentUser.uid}-${Date.now()}-${file.name}`;
+    const storageRef = ref(storage, `recipe-images/${uniqueFileName}`);
 
     // Subir la imagen a Firebase Storage
     await uploadBytes(storageRef, file);

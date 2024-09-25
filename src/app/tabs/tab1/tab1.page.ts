@@ -99,7 +99,14 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalController.create({
       component: NewRecipeModalComponent
     });
-    return await modal.present();
+
+    await modal.present();
+
+    // Esperar a que el modal se cierre
+    await modal.onDidDismiss();
+
+    // Recargar las recetas después de que el modal se cierre
+    this.loadRecipes();
   }
 
   async openRecipeDetail(receta: Receta) {
