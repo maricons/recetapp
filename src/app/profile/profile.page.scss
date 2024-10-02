@@ -2,3 +2,29 @@ ion-button.bt {
 
     background-color: white;
 }
+
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+  }
+
+  .profile-avatar {
+    width: 20vh;  /* Ajusta el ancho según sea necesario */
+    height: 20vh; /* Ajusta la altura según sea necesario */
+  }
+
+  .change-photo-icon {
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    right: 10px; /* Ajusta según necesites */
+    transform: translateY(-50%); /* Ajusta para centrarlo verticalmente */
+    font-size: 24px; /* Asegúrate de que sea suficientemente grande */
+    color: #ff7f50; /* Color salmón */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para visibilidad */
+    border-radius: 50%; /* Hacer el fondo redondo */
+    padding: 5px; /* Espaciado alrededor del ícono */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    z-index: 10; /* Asegúrate de que el ícono esté por encima del avatar */
+  }

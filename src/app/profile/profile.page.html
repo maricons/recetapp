@@ -13,7 +13,13 @@
             <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
           </ion-avatar>
           <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
-          <ion-button expand="block" color="medium" (click)="fileInput.click()">Cambiar Foto</ion-button>
+          
+          <!-- Ícono para cambiar foto -->
+          <ion-icon 
+            name="camera" 
+            class="change-photo-icon" 
+            (click)="fileInput.click()">
+          </ion-icon>
         </div>
 
         <ion-item>
