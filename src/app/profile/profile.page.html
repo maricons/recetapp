@@ -13,7 +13,7 @@
             <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
           </ion-avatar>
           <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
-          <ion-button expand="block" color="primary" (click)="fileInput.click()">Cambiar Foto</ion-button>
+          <ion-button expand="block" color="medium" (click)="fileInput.click()">Cambiar Foto</ion-button>
         </div>
 
         <ion-item>
@@ -26,10 +26,10 @@
           <ion-input [(ngModel)]="lastName" type="text"></ion-input>
         </ion-item>
 
-        <ion-button expand="block" color="success" (click)="saveProfile()">Guardar Cambios</ion-button>
+        <ion-button expand="block" color="primary" (click)="saveProfile()">Guardar Cambios</ion-button>
 
         <!-- Botón de Cerrar Sesión en Rojo -->
-        <ion-button expand="block" color="danger" (click)="logout()">Cerrar sesión</ion-button>
+        <ion-button expand="block" color="dark" (click)="logout()">Cerrar sesión</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -33,21 +33,31 @@
     width: 100%;
   }
 
+  
+  
+  @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); // Fuente divertida (Chewy)
+
   .animated-button {
-    opacity: 0;
-    background-color: #ff5722; /* Color de fondo del botón */
-    border: none;
-    color: white;
-    transition: opacity 1s ease-in-out, background-color 1s ease-in-out;
-    animation: fadeIn 2s ease-in forwards;
+      opacity: 0;
+      background-color: #ff5722 !important; /* Color de fondo del botón */
+      border: none;
+      color: white;
+      font-family: 'Chewy', cursive; /* Aplicar la fuente divertida */
+      font-size: 1.5rem; /* Tamaño del texto */
+      padding: 15px 30px; /* Tamaño del botón */
+      border-radius: 10px; /* Bordes redondeados */
+      transition: opacity 1s ease-in-out, background-color 1s ease-in-out;
+      animation: fadeIn 2s ease-in forwards;
+      text-align: center; /* Alinear el texto al centro */
+  
   }
   
+
 @keyframes fadeIn {
     0% {
       opacity: 0;
     }
     100% {
       opacity: 1;
-      background-color: #ffab40; /* Color final después de la animación */
     }
   }
