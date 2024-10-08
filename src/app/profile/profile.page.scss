@@ -3,12 +3,18 @@ ion-button.bt {
     background-color: white;
 }
 
+.main-container {
+  display: flex; /* Usar flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
 .profile-picture-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-  }
+  position: relative; /* Contenedor relativo */
+  display: flex; /* Flexbox para el contenedor */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+}
 
   .profile-avatar {
     width: 20vh;  /* Ajusta el ancho según sea necesario */
@@ -17,14 +23,14 @@ ion-button.bt {
 
   .change-photo-icon {
     position: absolute;
-    top: 50%; /* Centra verticalmente */
-    right: 10px; /* Ajusta según necesites */
-    transform: translateY(-50%); /* Ajusta para centrarlo verticalmente */
-    font-size: 24px; /* Asegúrate de que sea suficientemente grande */
+    top: 75%; /* Ajusta para que esté un poco hacia abajo del centro */
+    left: 75%; /* Ajusta para que esté un poco hacia la derecha del centro */
+    transform: translate(-50%, -50%); /* Centra el ícono */
+    font-size: 20px; /* Tamaño del ícono */
     color: #ff7f50; /* Color salmón */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para visibilidad */
-    border-radius: 50%; /* Hacer el fondo redondo */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    border-radius: 50%; /* Fondo redondeado */
     padding: 5px; /* Espaciado alrededor del ícono */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
     z-index: 10; /* Asegúrate de que el ícono esté por encima del avatar */
-  }
+}

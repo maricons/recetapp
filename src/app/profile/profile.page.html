@@ -8,18 +8,20 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="8">
-        <div class="profile-picture-container">
-          <ion-avatar class="profile-avatar">
-            <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
-          </ion-avatar>
-          <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
-          
-          <!-- Ícono para cambiar foto -->
-          <ion-icon 
-            name="camera" 
-            class="change-photo-icon" 
-            (click)="fileInput.click()">
-          </ion-icon>
+        <div class="main-container">
+          <div class="profile-picture-container">
+            <ion-avatar class="profile-avatar">
+              <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
+            </ion-avatar>
+            <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+            
+            <!-- Ícono para cambiar foto -->
+            <ion-icon 
+              name="camera" 
+              class="change-photo-icon" 
+              (click)="fileInput.click()">
+            </ion-icon>
+          </div>
         </div>
 
         <ion-item>
