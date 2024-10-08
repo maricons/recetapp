@@ -34,3 +34,20 @@ ion-button.bt {
     cursor: pointer; /* Cambia el cursor al pasar por encima */
     z-index: 10; /* Asegúrate de que el ícono esté por encima del avatar */
 }
+
+.button-container {
+  display: flex; /* Usar flexbox */
+  flex-direction: column; /* Apilar los botones verticalmente */
+  height: 30vh; /* Usar toda la altura de la ventana */
+  justify-content: space-between; /* Espaciar los elementos entre el principio y el final */
+}
+
+.spacer {
+  flex-grow: 1; /* Hacer que este div ocupe el espacio disponible */
+}
+
+.custom-heading {
+  font-family: 'Monserrat', sans-serif !important;
+  font-size: 30px; /* Ajusta el tamaño según sea necesario */
+  color: #333; /* Cambia el color si lo deseas */
+}

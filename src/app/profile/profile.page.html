@@ -24,7 +24,12 @@
           </div>
         </div>
 
-        <ion-item>
+        <div class="ion-text-center">
+        <h1 class="custom-heading">{{ firstName }} {{ lastName }}</h1>
+        </div>
+        
+
+        <!--<ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input [(ngModel)]="firstName" type="text"></ion-input>
         </ion-item>
@@ -33,11 +38,16 @@
           <ion-label position="floating">Apellido</ion-label>
           <ion-input [(ngModel)]="lastName" type="text"></ion-input>
         </ion-item>
+      -->
 
-        <ion-button expand="block" color="primary" (click)="saveProfile()">Guardar Cambios</ion-button>
+        <div class="button-container">
+          <ion-button expand="block" color="primary" (click)="saveProfile()">Modificar Perfil</ion-button>
 
-        <!-- Botón de Cerrar Sesión en Rojo -->
-        <ion-button expand="block" color="dark" (click)="logout()">Cerrar sesión</ion-button>
+          <div class="spacer"></div>
+
+          <!-- Botón de Cerrar Sesión en Rojo -->
+          <ion-button expand="block" color="dark" (click)="logout()">Cerrar sesión</ion-button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
