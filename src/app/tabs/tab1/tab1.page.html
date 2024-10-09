@@ -18,24 +18,29 @@
     <ion-row>
       <ion-col size="6" *ngFor="let receta of filteredRecetas">
 
-        <ion-card (click)="openRecipeDetail(receta)" class="no-border-card">
+        <ion-card color="light" (click)="openRecipeDetail(receta)">
           <!-- Foto y nombre del autor -->
+
+          <ion-img style="height: 5rem; width: 100%; object-fit: cover; overflow: hidden;" [src]="receta.imagen"></ion-img>
+
           <ion-card-header>
-            <div class="author-info">
+            
+            <!--<div class="author-info">
               
-              <div class="author-name">
-                {{ getAuthorName(receta.autorId) | async }}
-              </div>
+              {{ getAuthorName(receta.autorId) | async }}
             </div>
+          -->
+
+            <ion-card-title style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+              <h6>{{ receta.titulo }}</h6>
+            </ion-card-title>
           </ion-card-header>
         
           <!-- Imagen principal -->
-          <ion-img style="height: 5rem; border-radius: 10px; overflow: hidden;" [src]="receta.imagen"></ion-img>
+          
         
           <!-- Título -->
-          <ion-card-title class="card-title">
-            <ion-card-title><h6>{{ receta.titulo }}</h6></ion-card-title>
-          </ion-card-title>
+          
         
           <!-- Descripción -->
           <ion-card-content>
