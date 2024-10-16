@@ -21,7 +21,7 @@ export class ProfilePage implements OnInit {
   constructor(private firestore: Firestore, private storage: Storage, private auth: Auth, private router: Router) { }
 
   ngOnInit() {
-    onAuthStateChanged(this.auth, (user) => {
+    /*onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.currentUser = user;
         console.log('User is logged in:', user);
@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
         this.router.navigateByUrl('/login');
         // Aquí podrías redirigir al usuario a la página de login si no está autenticado
       }
-    });
+    });*/
   }
 
   isAuthenticated(): boolean {
