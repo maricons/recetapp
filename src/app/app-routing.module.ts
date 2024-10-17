@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
     canActivate: [authGuard]
   },
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   }
 
-  
+
 ];
 @NgModule({
   imports: [
@@ -30,4 +30,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

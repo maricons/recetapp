@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
-import { Auth, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Auth, User } from '@angular/fire/auth';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; // Asegúrate de que estás importando AuthService correctamente
 
 
 @Component({
@@ -18,21 +19,9 @@ export class ProfilePage implements OnInit {
 
   currentUser: User | null = null;
 
-  constructor(private firestore: Firestore, private storage: Storage, private auth: Auth, private router: Router) { }
+  constructor(private firestore: Firestore, private storage: Storage, private auth: Auth, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    /*onAuthStateChanged(this.auth, (user) => {
-      if (user) {
-        this.currentUser = user;
-        console.log('User is logged in:', user);
-        this.loadUserProfile(); // Carga el perfil solo si el usuario está autenticado
-      } else {
-        this.currentUser = null;
-        console.log('User is not logged in');
-        this.router.navigateByUrl('/login');
-        // Aquí podrías redirigir al usuario a la página de login si no está autenticado
-      }
-    });*/
   }
 
   isAuthenticated(): boolean {
@@ -87,12 +76,7 @@ export class ProfilePage implements OnInit {
     }, { merge: true });
   }
 
-  async logout() {
-    try {
-      await signOut(this.auth);
-      this.router.navigateByUrl('/login');  // Redirige al usuario a la página de login
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
+  logout() {
+    this.authService.logout(); // Llama al servicio AuthService para cerrar sesión
   }
 }
