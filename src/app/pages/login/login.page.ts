@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase
 import { Router } from '@angular/router';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertService } from '../../services/alert.service';  // Importa el servicio de alertas
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   firstname: string = '';
   lastname: string = '';
 
-  constructor(private firestore: Firestore, private auth: Auth, private router: Router, private authService: AuthService) { }
+  constructor(private firestore: Firestore, private auth: Auth, private router: Router, private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -28,15 +29,14 @@ export class LoginPage implements OnInit {
     try {
       await this.authService.login(this.email, this.password);  // Llama al método login del AuthService
     } catch (error) {
-      alert('Email o contraseña incorrectos');
+      this.alertService.presentAlert('Error', 'Email o contraseña incorrectos.');
     }
   }
-
 
   // Método para registrar un nuevo usuario
   async register() {
     if (!this.isValidEmail(this.email) || !this.password || this.password.length < 6 || !this.firstname || !this.lastname) {
-      alert('Por favor, completa todos los campos correctamente.');
+      this.alertService.presentAlert('Error', 'Llena todos los campos.');
       return;
     }
 
@@ -56,23 +56,23 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/tabs/tab1'); // Redirige a la página principal tras el registro
     } catch (error) {
       console.error('Error en el registro:', error);
-      alert('Error al registrar el usuario. Inténtalo de nuevo.');
+      this.alertService.presentAlert('Error', 'Error al registrar el usuario. Inténtalo de nuevo.');
     }
   }
 
   // Método para enviar correo de recuperación de contraseña
   async recoverPassword() {
     if (!this.email) {
-      alert('Por favor, ingresa tu correo electrónico.');
+      this.alertService.presentAlert('Error', 'Por favor, ingresa tu correo electrónico.');
       return;
     }
 
     try {
       await sendPasswordResetEmail(this.auth, this.email);
-      alert('Se ha enviado un correo electrónico para recuperar tu contraseña.');
+      this.alertService.presentAlert('Recuperación', 'Se ha enviado un correo electrónico para recuperar tu contraseña.');
     } catch (error) {
       console.error('Error al enviar el correo de recuperación:', error);
-      alert('Error al enviar el correo de recuperación. Por favor, verifica tu dirección de correo electrónico.');
+      this.alertService.presentAlert('Error', 'No encontramos ninguna cuenta con ese correo.');
     }
   }
 
