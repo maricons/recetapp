@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
-import { Auth, User } from '@angular/fire/auth';
+import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service'; // Asegúrate de que estás importando AuthService correctamente
-
 
 @Component({
   selector: 'app-profile',
@@ -19,9 +18,22 @@ export class ProfilePage implements OnInit {
 
   currentUser: User | null = null;
 
-  constructor(private firestore: Firestore, private storage: Storage, private auth: Auth, private router: Router, private authService: AuthService) { }
+  constructor(
+    private firestore: Firestore, 
+    private storage: Storage, 
+    private auth: Auth, 
+    private router: Router, 
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    // Obtiene el usuario autenticado cuando la página se inicializa
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.currentUser = user;
+        this.loadUserProfile();  // Cargar el perfil del usuario autenticado
+      }
+    });
   }
 
   isAuthenticated(): boolean {
@@ -36,7 +48,7 @@ export class ProfilePage implements OnInit {
         const userData = userDoc.data();
         this.firstName = userData?.['firstName'] || '';
         this.lastName = userData?.['lastName'] || '';
-        this.profilePictureUrl = userData?.['profilePictureUrl'] || '';
+        this.profilePictureUrl = userData?.['profilePictureUrl'] || ''; // Cargar la URL de la imagen
       }
     }
   }

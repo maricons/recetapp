@@ -11,7 +11,7 @@
         <div class="main-container">
           <div class="profile-picture-container">
             <ion-avatar class="profile-avatar">
-              <img [src]="profilePictureUrl || 'assets/default-avatar.png'" alt="Profile Picture">
+              <img [src]="profilePictureUrl" alt="Profile Picture">
             </ion-avatar>
             <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
             
@@ -29,7 +29,7 @@
         </div>
         
 
-        <!--<ion-item>
+        <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input [(ngModel)]="firstName" type="text"></ion-input>
         </ion-item>
@@ -38,7 +38,7 @@
           <ion-label position="floating">Apellido</ion-label>
           <ion-input [(ngModel)]="lastName" type="text"></ion-input>
         </ion-item>
-      -->
+      
 
         <div class="button-container">
           <ion-button expand="block" color="primary" (click)="saveProfile()">Modificar Perfil</ion-button>
