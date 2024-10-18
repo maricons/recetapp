@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strictPropertyInitialization": false,
-"skipLibCheck": true,
+    "skipLibCheck": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

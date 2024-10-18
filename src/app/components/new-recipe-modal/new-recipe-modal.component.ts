@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Firestore, collection, addDoc, doc, getDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-new-recipe-modal',
   templateUrl: './new-recipe-modal.component.html',
   styleUrls: ['./new-recipe-modal.component.scss'],
 })
-export class NewRecipeModalComponent {
+export class NewRecipeModalComponent implements OnInit{
   recipe = {
     titulo: '',
     descripcion: '',
     ingredientes: '',
     instrucciones: '',
     minutos: '',
-    imagenUrl: ''
+    imagenUrl: '',
+    categoria: ''
   };
+
+  categorias: string[] = []; 
 
   selectedFile: File | null = null;
   currentUser: any;
@@ -25,12 +29,23 @@ export class NewRecipeModalComponent {
   constructor(
     private modalController: ModalController,
     private firestore: Firestore,
-    private auth: Auth  // Agregado para manejar la autenticación
+    private auth: Auth,  // Agregado para manejar la autenticación
+    private categoryService: CategoryService
   ) {
     this.auth.onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
       }
+    });
+  }
+
+  ngOnInit() {
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe((categorias: string[]) => {
+      this.categorias = categorias;
     });
   }
 

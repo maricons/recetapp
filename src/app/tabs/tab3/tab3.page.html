@@ -3,10 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title> <!-- Puedes cambiar el título según tu necesidad -->
+    <ion-title>Categorías API</ion-title> <!-- Puedes cambiar el título según tu necesidad -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let categoria of categorias">
+      <ion-label>{{ categoria }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
