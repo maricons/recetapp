@@ -43,6 +43,23 @@ export class NewRecipeModalComponent implements OnInit{
     this.getCategories();
   }
 
+  // Función para enumerar instrucciones
+  procesarInstrucciones(): void{
+    if (this.recipe.instrucciones){
+      let lineas = this.recipe.instrucciones.split('\n');
+
+      let lineasNumeradas = lineas.map((linea, index) => {
+        if (linea.trim() !== '') {
+          return `${index + 1}. ${linea.trim()}`;
+        }
+        return '';
+      });
+
+      this.recipe.instrucciones = lineasNumeradas.filter(Boolean).join('\n');
+
+    }
+  }
+
   getCategories() {
     this.categoryService.getCategories().subscribe((categorias: string[]) => {
       this.categorias = categorias;
@@ -82,6 +99,8 @@ export class NewRecipeModalComponent implements OnInit{
     if (this.selectedFile && this.currentUser) {
       try {
         console.log('Selected file:', this.selectedFile);
+
+        this.procesarInstrucciones();
 
         this.recipe.imagenUrl = await this.uploadImage(this.selectedFile);
         console.log('Image uploaded successfully:', this.recipe.imagenUrl);

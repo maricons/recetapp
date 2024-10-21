@@ -53,7 +53,7 @@
       <hr class="divider">
 
       <h3>Instrucciones</h3>
-      <p>{{ receta.instrucciones }}</p>
+      <div [innerHTML]="receta.instrucciones" style="white-space: pre-wrap;"></div>
     </ion-card-content>
   </ion-card>
 </ion-content>
