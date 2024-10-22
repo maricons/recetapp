@@ -15,9 +15,7 @@ export class AuthService {
   // comprobar si esta logeado
   isAuthenticated(): Observable<boolean> {
     return this.afAuth.authState.pipe(
-      map(user => {
-        return !!user;
-      })
+      map(user => !!user)  // Convierte el usuario en un booleano
     );
   }
 

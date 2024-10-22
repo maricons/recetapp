@@ -85,3 +85,16 @@ li ion-icon {
     background-color: #ddd;
     margin: 16px 0;
 }
+
+.like-icon {
+    position: absolute;
+    bottom: 10px;
+    /* Ajusta la distancia desde la parte inferior */
+    right: 10px;
+    /* Ajusta la distancia desde el borde derecho */
+    font-size: 36px;
+    /* Tamaño del icono */
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+}

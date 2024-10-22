@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Firestore, collection, addDoc, doc, getDoc } from '@angular/fire/firestore';
-import { Auth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CategoryService } from 'src/app/services/category.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -36,12 +36,13 @@ export class NewRecipeModalComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private firestore: Firestore,
-    private auth: Auth,  // Agregado para manejar la autenticación
+    private afAuth: AngularFireAuth,
     private categoryService: CategoryService
   ) {
-    this.auth.onAuthStateChanged(user => {
+    this.afAuth.authState.subscribe(user => {
       if (user) {
         this.currentUser = user;
+        console.log('Usuario autenticado:', this.currentUser);
       }
     });
   }
@@ -71,8 +72,8 @@ export class NewRecipeModalComponent implements OnInit {
   }
 
   // Función para enumerar instrucciones
-  procesarInstrucciones(): void{
-    if (this.recipe.instrucciones){
+  procesarInstrucciones(): void {
+    if (this.recipe.instrucciones) {
       let lineas = this.recipe.instrucciones.split('\n');
 
       let lineasNumeradas = lineas.map((linea, index) => {
