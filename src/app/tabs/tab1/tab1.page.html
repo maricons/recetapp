@@ -1,3 +1,9 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recetas de la Comunidad</ion-title> <!-- Puedes cambiar el título según tu necesidad -->
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
 
   <!-- Search Bar -->
@@ -5,31 +11,15 @@
     class="round-searchbar">
   </ion-searchbar>
 
-  <!-- New Recipes Title -->
-  <div class="new-recipes-title" *ngIf="!seleccionando">
-    <ion-button expand="block" (click)="openNewRecipeModal()">Nueva receta</ion-button>
-  </div>
 
-  <!-- Botón para activar el modo selección -->
-  <ion-button expand="full" (click)="toggleSeleccionar()">
-    {{ seleccionando ? 'Cancelar selección' : 'Seleccionar recetas' }}
-  </ion-button>
-  <ion-button expand="full" (click)="eliminarRecetasSeleccionadas()" [disabled]="!hayRecetasSeleccionadas()" *ngIf="seleccionando">
-    Eliminar recetas seleccionadas
-  </ion-button>
 
   <!-- Grid Layout for Cards -->
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let receta of filteredRecetas">
-        <ion-card
-          color="light"
-          (click)="seleccionando ? toggleSelection(receta) : openRecipeDetail(receta)"
-          [ngClass]="{ 'selected-card': receta.selected }"  
-        >
+        <ion-card color="light" (click)="openRecipeDetail(receta)">
           <ion-img style="height: 5rem; width: 100%; object-fit: cover; overflow: hidden;"
             [src]="receta.imagen"></ion-img>
-
           <ion-card-header>
             <ion-card-title style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
               <h6>{{ receta.titulo }}</h6>

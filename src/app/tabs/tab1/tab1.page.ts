@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Firestore, collection, getDocs, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+//import { Firestore, collection, getDocs, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+
 import { RecipeDetailModalComponent } from '../../components/recipe-detail-modal/recipe-detail-modal.component';
 import { NewRecipeModalComponent } from '../../components/new-recipe-modal/new-recipe-modal.component';
 import { Auth } from '@angular/fire/auth';
@@ -71,60 +73,7 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  // funcion para alternar el modo de selección
-  toggleSeleccionar(): void{
-    this.seleccionando = !this.seleccionando
-    console.log('Modo selección:', this.seleccionando); // Agrega esta línea
-
-    // cancelar seleccion, desmarca todas las marcas
-    if (!this.seleccionando){
-      this.recetas.forEach(receta => receta.selected = false);
-    }
-  }
-
-  toggleSelection(receta: Receta): void {
-    receta.selected = !receta.selected; // Cambia el estado de la receta seleccionada
-  }
-
-  toggleRecetaSeleccionada(receta: Receta): void {
-    if (this.seleccionando) { // Solo permite seleccionar si el modo de selección está activado
-      receta.selected = !receta.selected; // Alterna el estado de selección
-    }
-  }
-
-  // funcion para verificar si hay almenos una receta seleccionada
-  hayRecetasSeleccionadas(): boolean {
-    return this.recetas.some(receta => receta.selected);
-  }
-
-  async eliminarRecetasSeleccionadas(): Promise<void> {
-    const recetasAEliminar = this.recetas.filter(receta => receta.selected);
-
-    if (recetasAEliminar.length === 0) {
-      console.log('No hay recetas seleccionadas para eliminar');
-      return;
-    }
-
-    for (const receta of recetasAEliminar) {
-
-      if (!receta.id) {
-        console.error('La receta no tiene un ID válido: ', receta);
-        continue;
-      }
-
-      try {
-        const recetaRef = doc(this.firestore, 'recetas', receta.id);
-        await deleteDoc(recetaRef);
-        console.log(`Receta ${receta.titulo} eliminada exitosamente`);
-      } catch (error) {
-        console.error('Error al eliminar la receta: ', error);
-      }
-    }
-
-    //actualizar listado de recetas local
-    this.recetas = this.recetas.filter(receta => !receta.selected);
-    this.filteredRecetas = this.filteredRecetas.filter(receta => !receta.selected);
-  }
+ 
 
   async loadAuthorNames() {
     for (const receta of this.recetas) {
