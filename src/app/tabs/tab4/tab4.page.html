@@ -1,72 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Mis Recetas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tab4</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <!-- Search Bar -->
-  <ion-searchbar placeholder="Search a Recipe..."></ion-searchbar>
+  <ion-searchbar placeholder="Buscar receta..." [(ngModel)]="searchTerm" (ionInput)="filterRecipes()"
+    class="round-searchbar">
+  </ion-searchbar>
 
   <!-- New Recipes Title -->
-  <div class="new-recipes-title">
-    <h2> Mis recetas</h2>
+  <div class="new-recipes-title" *ngIf="!seleccionando">
+    <ion-button expand="block" (click)="openNewRecipeModal()">Nueva receta</ion-button>
   </div>
 
-  <!--  Cards Section -->
+  <!-- Botones para selección y eliminación, ajustados al mismo ancho -->
+  <ion-grid>
+    <ion-row>
+      <!-- Botón para activar/desactivar el modo selección -->
+      <ion-col size="6">
+        <ion-button expand="block" (click)="toggleSeleccionar()">
+          {{ seleccionando ? 'Cancelar selección' : 'Seleccionar recetas' }}
+        </ion-button>
+      </ion-col>
+      
+      <!-- Botón para eliminar recetas seleccionadas, solo visible en modo selección -->
+      <ion-col size="6" *ngIf="seleccionando">
+        <ion-button expand="block" (click)="eliminarRecetasSeleccionadas()" 
+          [disabled]="!hayRecetasSeleccionadas()">
+          Eliminar seleccionadas
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <!-- Grid Layout for Cards -->
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
+      <ion-col size="6" *ngFor="let receta of filteredRecetas">
+        <ion-card
+          color="light"
+          (click)="seleccionando ? toggleSelection(receta) : openRecipeDetail(receta)"
+          [ngClass]="{ 'selected-card': receta.selected }">
+          
+          <!-- Imagen de la receta -->
+          <ion-img style="height: 5rem; width: 100%; object-fit: cover; overflow: hidden;"
+            [src]="receta.imagen"></ion-img>
+
+          <!-- Título de la receta -->
           <ion-card-header>
-            <ion-card-title>Receta 1</ion-card-title>
+            <ion-card-title style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+              <h6>{{ receta.titulo }}</h6>
+            </ion-card-title>
           </ion-card-header>
+
+          <!-- Tiempo de la receta -->
           <ion-card-content>
-            Detalles de la Receta 1.
+            <ion-icon class="icon" name="time-outline"></ion-icon>
+            <span class="text">{{ formatTiempo(receta.minutos) }}</span>
           </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 2</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 2.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 3</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 3.
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-img src="assets/images/recipe1.png"></ion-img>
-          <ion-card-header>
-            <ion-card-title>Receta 4</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Detalles de la Receta 4.
-          </ion-card-content>
+
         </ion-card>
       </ion-col>
     </ion-row>

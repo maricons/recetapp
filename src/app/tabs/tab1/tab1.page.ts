@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Firestore, collection, getDocs, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+//import { Firestore, collection, getDocs, doc, getDoc, deleteDoc } from '@angular/fire/firestore';
+
 import { RecipeDetailModalComponent } from '../../components/recipe-detail-modal/recipe-detail-modal.component';
 import { NewRecipeModalComponent } from '../../components/new-recipe-modal/new-recipe-modal.component';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
 
 interface Receta {
   titulo: string;
@@ -17,6 +20,7 @@ interface Receta {
   minutos: number;
   autorId: string;
   id?: string;
+  selected: boolean;
 }
 
 @Component({
@@ -29,7 +33,8 @@ export class Tab1Page implements OnInit {
   recetas: Receta[] = [];
   filteredRecetas: Receta[] = [];
   searchTerm: string = '';
-
+  seleccionando: boolean = false;
+  
   // Mapa para almacenar nombres de autores
   authorNames = new Map<string, Observable<string>>();
 
@@ -44,6 +49,8 @@ export class Tab1Page implements OnInit {
     this.loadRecipes();
   }
 
+  
+
   async loadRecipes() {
     try {
       const recipesCollection = collection(this.firestore, 'recetas');
@@ -53,7 +60,8 @@ export class Tab1Page implements OnInit {
         const data = doc.data() as Receta; // Asegúrate de que el tipo es Receta
         return {
           ...data,
-          id: doc.id
+          id: doc.id,
+          selected: false
         };
       });
       this.filteredRecetas = this.recetas;
@@ -64,6 +72,8 @@ export class Tab1Page implements OnInit {
       console.error('Error loading recipes:', error);
     }
   }
+
+ 
 
   async loadAuthorNames() {
     for (const receta of this.recetas) {
