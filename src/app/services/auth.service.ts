@@ -12,16 +12,16 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth, private router: Router, private auth: Auth) { }
 
-  // Método para verificar si el usuario está autenticado
+  // comprobar si esta logeado
   isAuthenticated(): Observable<boolean> {
     return this.afAuth.authState.pipe(
       map(user => {
-        return !!user;  // Retorna true si el usuario está autenticado, false si no lo está
+        return !!user;
       })
     );
   }
 
-  authMode: string = 'login'; // Puedes cambiar entre login y registro
+  authMode: string = 'login';
   email: string = '';
   password: string = '';
   firstname: string = '';
@@ -31,16 +31,16 @@ export class AuthService {
     try {
       const user = await this.afAuth.signInWithEmailAndPassword(email, password);
       console.log('Login correcto', user);
-      this.router.navigate(['/tabs/tab1']);  // Redirige al usuario a la página principal
+      this.router.navigate(['/tabs/tab1']);
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      throw error;  // Propaga el error para que el componente pueda manejarlo si lo desea
+      throw error;
     }
   }
 
   // Método para cerrar sesión
   async logout() {
     await this.afAuth.signOut();
-    this.router.navigate(['/login']);  // Redirige al usuario a la página de login
+    this.router.navigate(['/login']);
   }
 }

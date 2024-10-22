@@ -10,6 +10,12 @@
 <ion-content>
   <ion-list>
     <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+      <ion-select [(ngModel)]="recipe.categoria" [interfaceOptions]="customOptions" interface="alert" placeholder="Seleccionar...">
+        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label position="stacked">Título</ion-label>
       <ion-input [(ngModel)]="recipe.titulo"></ion-input>
     </ion-item>
@@ -29,16 +35,17 @@
       <ion-label position="stacked">Tiempo en minutos</ion-label>
       <ion-input type="number" [(ngModel)]="recipe.minutos"></ion-input>
     </ion-item>
+    <!--<ion-item>
+      <ion-label position="stacked">Imagen</ion-label>
+      <ion-button expand="block" (click)="selectImage()">Seleccionar imagen</ion-button>
+    </ion-item>-->
+
     <ion-item>
       <ion-label position="stacked">Imagen</ion-label>
       <input type="file" (change)="onFileSelected($event)" />
     </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Categoría</ion-label>
-      <ion-select [(ngModel)]="recipe.categoria">
-        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
-      </ion-select>
-    </ion-item>
+
+    <ion-img *ngIf="selectedImage" [src]="selectedImage"></ion-img>
   </ion-list>
   <ion-button expand="block" (click)="saveRecipe()">Publicar Receta</ion-button>
 </ion-content>

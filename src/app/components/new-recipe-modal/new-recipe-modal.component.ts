@@ -4,13 +4,20 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Firestore, collection, addDoc, doc, getDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { CategoryService } from 'src/app/services/category.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-new-recipe-modal',
   templateUrl: './new-recipe-modal.component.html',
   styleUrls: ['./new-recipe-modal.component.scss'],
 })
-export class NewRecipeModalComponent implements OnInit{
+
+
+export class NewRecipeModalComponent implements OnInit {
+
+  selectedImage: string | null | undefined = null;
+  customOptions: any;
+
   recipe = {
     titulo: '',
     descripcion: '',
@@ -21,7 +28,7 @@ export class NewRecipeModalComponent implements OnInit{
     categoria: ''
   };
 
-  categorias: string[] = []; 
+  categorias: string[] = [];
 
   selectedFile: File | null = null;
   currentUser: any;
@@ -41,6 +48,26 @@ export class NewRecipeModalComponent implements OnInit{
 
   ngOnInit() {
     this.getCategories();
+
+    this.customOptions = {
+      header: 'Selecciona una Categoría',
+      buttons: [
+        {
+          text: 'Cerrar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Seleccionado Cancelar');
+          }
+        },
+        {
+          text: 'Seleccionar',
+          handler: (value: string) => {
+            console.log('Categoría seleccionada:', value);
+          }
+        }
+      ]
+    };
   }
 
   getCategories() {
@@ -53,6 +80,20 @@ export class NewRecipeModalComponent implements OnInit{
     this.modalController.dismiss({
       dismissed: true
     });
+  }
+
+  async selectImage() {
+
+    console.log("seleccionando foto...");
+
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt // Esto muestra opciones para cámara o galería
+    });
+
+    this.selectedImage = image.dataUrl;
   }
 
   onFileSelected(event: Event) {
@@ -97,6 +138,7 @@ export class NewRecipeModalComponent implements OnInit{
         // Guardar la receta con la información del autor
         const recipesCollection = collection(this.firestore, 'recetas');
         await addDoc(recipesCollection, {
+          categoria: this.recipe.categoria,
           titulo: this.recipe.titulo,
           descripcion: this.recipe.descripcion,
           ingredientes: this.recipe.ingredientes,
