@@ -20,7 +20,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CategoryService } from './services/category.service';
+import { CategoriaService } from './services/category.service';
 //not obsoleto
 
 
@@ -41,7 +41,7 @@ import { CategoryService } from './services/category.service';
   })),
   provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()),
   provideFunctions(() => getFunctions()), provideMessaging(() => getMessaging()),
-  provideHttpClient(), CategoryService],
+  provideHttpClient(), CategoriaService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

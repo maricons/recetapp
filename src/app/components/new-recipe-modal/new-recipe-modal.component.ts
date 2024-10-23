@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Firestore, collection, addDoc, doc, getDoc } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoriaService } from 'src/app/services/category.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
@@ -37,7 +37,7 @@ export class NewRecipeModalComponent implements OnInit {
     private modalController: ModalController,
     private firestore: Firestore,
     private afAuth: AngularFireAuth,
-    private categoryService: CategoryService
+    private categoriaService: CategoriaService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -89,8 +89,11 @@ export class NewRecipeModalComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getCategories().subscribe((categorias: string[]) => {
-      this.categorias = categorias;
+    this.categoriaService.getCategorias().subscribe(data => {
+      this.categorias = data.categorias; // Asegúrate de que esto coincida con la estructura del JSON
+      console.log(this.categorias); // Aquí puedes trabajar con los datos
+    }, error => {
+      console.error('Error al obtener las categorías:', error);
     });
   }
 
